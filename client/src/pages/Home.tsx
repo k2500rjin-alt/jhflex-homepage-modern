@@ -1,6 +1,7 @@
 /* JHFLEX Defense Circuit Editorial: reference-matched one-page layout, asymmetry, circuit cyan, dark navy, industrial precision. */
 import { FormEvent, useEffect, useState } from "react";
-import { ArrowDownRight, ArrowUpRight, Check, ChevronRight, Menu, X } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Check, ChevronRight, Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "../contexts/ThemeContext";
 
 const navItems = [
   ["회사소개", "about"],
@@ -66,6 +67,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [activeProduct, setActiveProduct] = useState(0);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: 0.12 });
@@ -102,8 +104,15 @@ export default function Home() {
     <header className="site-header">
       <a className="brand" href="#top" aria-label="JHFLEX 홈"><span className="brand-mark"><i /><i /><i /><i /></span><span><strong>JH</strong><b>FLEX</b><small>FPCB SPECIALIST · EST. 2009</small></span></a>
       <nav className={menuOpen ? "is-open" : ""}>{navItems.map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav>
-      <a className="header-cta" href="#contact">견적 문의 <ArrowUpRight size={15} /></a>
-      <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="메뉴 열기">{menuOpen ? <X /> : <Menu />}</button>
+      <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        {toggleTheme && (
+          <button onClick={toggleTheme} className="theme-toggle" aria-label="테마 변경" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+        )}
+        <a className="header-cta" href="#contact">견적 문의 <ArrowUpRight size={15} /></a>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="메뉴 열기" style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer' }}>{menuOpen ? <X /> : <Menu />}</button>
+      </div>
     </header>
 
     <main id="top">
