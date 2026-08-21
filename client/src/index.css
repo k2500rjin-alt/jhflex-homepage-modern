@@ -113,3 +113,36 @@
   background: #00e0ff;
   transform: translateY(-1px);
 }
+
+/* --- DARK MODE OVERRIDES --- */
+.dark .section-heading h2 { color: var(--ink); }
+.dark .section-heading p { color: var(--muted); }
+.dark .about-image { background: #091724; }
+.dark .about-image>span { color: #82a1a8; }
+.dark .history-item p { color: var(--muted); }
+.dark .strength-card p { color: var(--muted); }
+.dark .technical-diagram { background: linear-gradient(135deg,#0a1b2a 0%,#061321 100%); color: var(--ink); border-color: rgba(0,217,255,0.1); }
+.dark .technical-diagram figcaption p { color: var(--muted); }
+.dark .technical-diagram__layer { background: rgba(0,217,255,.05); }
+.dark .technical-diagram>small { color: #587882; }
+.dark .product-image { background: #050e17; }
+.dark .product-image .technical-diagram { background: linear-gradient(135deg,#061321 0%,#040a10 100%); }
+.dark .product-feature-copy p { color: var(--muted); }
+.dark .defense-image { background: #091724; }
+.dark .defense-image:after { border-color: rgba(0,217,255,0.2); }
+.dark .defense-item p { color: var(--muted); }
+.dark .process-step i { color: #3a5c68; }
+.dark .process-board { border-color: rgba(0,217,255,0.1); }
+.dark .process-step { border-color: rgba(0,217,255,0.1); }
+.dark .process-metrics { border-color: rgba(0,217,255,0.1); }
+.dark .tech-card p { color: var(--muted); }
+.dark .tech-card>div b { border-color: rgba(0,217,255,0.3); }
+.dark .material-image { background: #050e17; }
+.dark .material-cards p { color: var(--muted); }
+.dark .contact-section { background: #050d14; }
+.dark .contact-info small { color: var(--muted); }
+.dark .inquiry-form label { color: #8da4a6; }
+.dark .inquiry-form input, .dark .inquiry-form select, .dark .inquiry-form textarea { border-color: rgba(0,217,255,0.2); background: rgba(0,0,0,0.2); color: var(--ink); }
+.dark .inquiry-form input::placeholder, .dark .inquiry-form textarea::placeholder { color: #4f686c; }
+.dark .form-label span { color: #6a8282; }
+.dark .inquiry-form input:focus, .dark .inquiry-form select:focus, .dark .inquiry-form textarea:focus { border-color: var(--cyan); }
