@@ -76,7 +76,8 @@ export default function Home() {
   }, []);
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
-    // 메일이 하나로 묶이지 않도록 제출 직전에 제목(subject)에 회사명과 현재 시간을 추가합니다.
+    event.preventDefault(); // 리액트 기본 전송 차단
+    
     const form = event.currentTarget;
     const companyInput = form.elements.namedItem('업체명') as HTMLInputElement;
     const subjectInput = form.elements.namedItem('_subject') as HTMLInputElement;
@@ -87,9 +88,8 @@ export default function Home() {
       subjectInput.value = `JH Flex 견적 문의 - ${companyName} (${dateStr})`;
     }
     
-    // 정상적으로 폼 제출이 일어나도록 event.preventDefault()는 호출하지 않습니다.
-    // 폼 제출 완료 버튼 피드백을 위해 상태 변경
     setSent(true);
+    form.submit(); // 강제 전송
   };
 
   return <div className="site-shell">
