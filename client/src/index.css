@@ -148,3 +148,6 @@
 .dark .inquiry-form input:focus, .dark .inquiry-form select:focus, .dark .inquiry-form textarea:focus { border-color: var(--cyan); }
 
 .dark .defense-section { background: #071520; }
+
+.dark .mini-label { color: var(--cyan); }
+.dark .form-label { color: var(--cyan); }
