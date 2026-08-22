@@ -75,29 +75,21 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    // 메일이 하나로 묶이지 않도록 제출 직전에 제목(subject)에 회사명과 현재 시간을 추가합니다.
     const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      // Use formsubmit.co which allows sending directly to an email address without setup
-      // Note: On first submit, it will send an activation email to k2500rj@gmail.com
-      const response = await fetch("https://formsubmit.co/ajax/k2500rj@gmail.com", {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-      if (response.ok) {
-        setSent(true);
-      } else {
-        alert("메일 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
-      }
-    } catch (error) {
-      alert("네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.");
+    const companyInput = form.elements.namedItem('업체명') as HTMLInputElement;
+    const subjectInput = form.elements.namedItem('_subject') as HTMLInputElement;
+    
+    if (companyInput && subjectInput) {
+      const companyName = companyInput.value;
+      const dateStr = new Date().toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      subjectInput.value = `JH Flex 견적 문의 - ${companyName} (${dateStr})`;
     }
+    
+    // 정상적으로 폼 제출이 일어나도록 event.preventDefault()는 호출하지 않습니다.
+    // 폼 제출 완료 버튼 피드백을 위해 상태 변경
+    setSent(true);
   };
 
   return <div className="site-shell">
@@ -308,7 +300,7 @@ export default function Home() {
 
       <section id="material" className="section material-section dark-section"><div className="content-wrap material-grid"><div><SectionHeading light eyebrow="MATERIAL" title={"사용 <b>소재</b>"} text="DuPont™ 공인 소재를 사용하여 최고 신뢰성의 FPCB를 제조합니다." /><TechnicalDiagram index={4} className="material-image" /></div><div className="material-cards"><article><small>DUPONT™ PYRALUX®</small><h3>Pyralux® AP</h3><p>All-Polyimide Double-Sided CCL. 접착제 없는 구조로 다층 Flex·Rigid-Flex 적용에 최적입니다.</p><div className="material-stats"><b>3.2 Dk<small>유전율 (10GHz)</small></b><b>0.002 Df<small>손실계수 (1MHz)</small></b><b>220°C Tg<small>유리전이온도</small></b><b>6,000+<small>굴곡 내구성</small></b></div></article><article><small>DUPONT™ PYRALUX®</small><h3>Pyralux® LF Coverlay</h3><p>Kapton® 폴리이미드 필름과 아크릴 접착제 구조. Flex·Rigid-Flex 회로 보호용 커버레이입니다.</p><div className="material-stats"><b>3.6 Dk<small>유전율 (1MHz)</small></b><b>10 lb/in<small>박리강도</small></b><b>25~76μm<small>접착제 두께</small></b></div></article></div></div></section>
 
-      <section id="contact" className="section contact-section"><div className="content-wrap contact-grid"><div><SectionHeading eyebrow="CONTACT & INQUIRY" title={"견적 및 <b>문의</b>"} text="제품 사양·견적·납기 문의는 아래로 연락해 주세요. 빠르게 답변드립니다." /><div className="contact-info">{[["주소", "경기도 안산시 단원구 만해로 205", "타원타크라3차 B동 407호"],["팩스", "050-4166-4484", ""],["이메일", "k2500rj@gmail.com", ""]].map(([label, line, sub]) => <div key={label}><span>{label}</span><b>{line}</b>{sub && <small>{sub}</small>}</div>)}</div><div className="map-links"><a href="https://map.kakao.com/?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EB%A7%8C%ED%95%B4%EB%A1%9C%20205" target="_blank" rel="noreferrer">↗ 카카오맵</a><a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EB%A7%8C%ED%95%B4%EB%A1%9C%20205" target="_blank" rel="noreferrer">↗ 네이버지도</a></div></div><form className="inquiry-form" action="https://formsubmit.co/d87373d20662336563a93d6a8df20bd1" method="POST" encType="multipart/form-data"><input type="hidden" name="_captcha" value="false" /><input type="hidden" name="_subject" value="JH Flex 제품 견적 요청 드립니다 - {{업체명}}" /><input type="hidden" name="_template" value="table" /><input type="hidden" name="_next" value="https://k2500rjin-alt.github.io/jhflex-homepage-/" /><div className="form-label">SEND INQUIRY <span>필수 항목을 입력해 주세요.</span></div><div className="form-row"><label>회사명<input name="업체명" placeholder="회사명" required /></label><label>담당자<input name="담당자명" placeholder="성함" required /></label></div><div className="form-row"><label>연락처<input name="연락처" type="tel" placeholder="010-0000-0000" required /></label><label>이메일<input name="이메일" type="email" placeholder="email@company.com" required /></label></div><div className="form-row"><label>문의 제품<select name="문의_제품" defaultValue="" required><option value="" disabled>선택해주세요</option>{products.map((p) => <option key={String(p[2])}>{p[2]}</option>)}</select></label><label>레이어 수<select name="레이어_수" defaultValue="미정"><option>미정</option><option>1Layer</option><option>2Layer</option><option>4Layer</option><option>6Layer 이상</option></select></label></div><label>희망 수량<input name="희망_수량" placeholder="예: 100장" /></label><label>외형gbr data 첨부<small style={{display:"block", color:"var(--silver)", fontSize:"11px", marginTop:"4px"}}>* 업로드 가능 파일: CAD data 파일, CAM350 data 파일</small><input type="file" name="첨부파일" className="file-input" /></label><label>문의 내용<textarea name="문의_내용" placeholder="문의 내용을 상세히 입력해 주세요.\n(소재, 두께, 표면처리, 희망납기 등 기재 시 빠른 답변 가능)" required /></label><button className="submit-button" type="submit">{sent ? <><Check size={17} /> 문의가 접수되었습니다</> : <>견적 문의 보내기 <ArrowUpRight size={17} /></>}</button></form></div></section>
+      <section id="contact" className="section contact-section"><div className="content-wrap contact-grid"><div><SectionHeading eyebrow="CONTACT & INQUIRY" title={"견적 및 <b>문의</b>"} text="제품 사양·견적·납기 문의는 아래로 연락해 주세요. 빠르게 답변드립니다." /><div className="contact-info">{[["주소", "경기도 안산시 단원구 만해로 205", "타원타크라3차 B동 407호"],["팩스", "050-4166-4484", ""],["이메일", "k2500rj@gmail.com", ""]].map(([label, line, sub]) => <div key={label}><span>{label}</span><b>{line}</b>{sub && <small>{sub}</small>}</div>)}</div><div className="map-links"><a href="https://map.kakao.com/?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EB%A7%8C%ED%95%B4%EB%A1%9C%20205" target="_blank" rel="noreferrer">↗ 카카오맵</a><a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EB%A7%8C%ED%95%B4%EB%A1%9C%20205" target="_blank" rel="noreferrer">↗ 네이버지도</a></div></div><form className="inquiry-form" action="https://formsubmit.co/d87373d20662336563a93d6a8df20bd1" method="POST" encType="multipart/form-data" onSubmit={submit}><input type="hidden" name="_captcha" value="false" /><input type="hidden" name="_subject" value="JH Flex 제품 견적 요청 드립니다 - {{업체명}}" /><input type="hidden" name="_template" value="table" /><input type="hidden" name="_next" value="https://k2500rjin-alt.github.io/jhflex-homepage-/" /><div className="form-label">SEND INQUIRY <span>필수 항목을 입력해 주세요.</span></div><div className="form-row"><label>회사명<input name="업체명" placeholder="회사명" required /></label><label>담당자<input name="담당자명" placeholder="성함" required /></label></div><div className="form-row"><label>연락처<input name="연락처" type="tel" placeholder="010-0000-0000" required /></label><label>이메일<input name="이메일" type="email" placeholder="email@company.com" required /></label></div><div className="form-row"><label>문의 제품<select name="문의_제품" defaultValue="" required><option value="" disabled>선택해주세요</option>{products.map((p) => <option key={String(p[2])}>{p[2]}</option>)}</select></label><label>레이어 수<select name="레이어_수" defaultValue="미정"><option>미정</option><option>1Layer</option><option>2Layer</option><option>4Layer</option><option>6Layer 이상</option></select></label></div><label>희망 수량<input name="희망_수량" placeholder="예: 100장" /></label><label>외형gbr data 첨부<small style={{display:"block", color:"var(--silver)", fontSize:"11px", marginTop:"4px"}}>* 업로드 가능 파일: CAD data 파일, CAM350 data 파일</small><input type="file" name="첨부파일" className="file-input" /></label><label>문의 내용<textarea name="문의_내용" placeholder="문의 내용을 상세히 입력해 주세요.\n(소재, 두께, 표면처리, 희망납기 등 기재 시 빠른 답변 가능)" required /></label><button className="submit-button" type="submit">{sent ? <><Check size={17} /> 문의가 접수되었습니다</> : <>견적 문의 보내기 <ArrowUpRight size={17} /></>}</button></form></div></section>
     </main>
     <footer className="site-footer"><div className="content-wrap footer-grid"><a className="brand brand-footer" href="#top"><span className="brand-mark"><i /><i /><i /><i /></span><span><strong>JH</strong><b>FLEX</b><small>DEFENSE GRADE FPCB SPECIALIST · SINCE 2009</small></span></a><div className="footer-nav">{navItems.slice(0, 6).map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}</div><div className="copyright">© 2009 JHFLEX Co., Ltd. All Rights Reserved.<br />사업자등록번호: 215-08-22790 | 대표: 문지학<br />경기도 안산시 단원구 만해로 205</div></div></footer>
   </div>;
