@@ -436,24 +436,50 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Business & Legal Info Grid */}
-          <div className="pt-8 flex flex-col gap-3 text-xs text-muted-foreground leading-relaxed">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
-              <span><strong>상호:</strong> ㈜JH FLEX</span>
-              <span className="text-border">|</span>
-              <span><strong>대표자:</strong> 문지학</span>
-              <span className="text-border">|</span>
-              <span><strong>사업자등록번호:</strong> 215-08-22790</span>
+          {/* Business & Legal Info Grid + Map Buttons */}
+          <div className="pt-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="flex flex-col gap-3 text-xs text-muted-foreground leading-relaxed">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                <span><strong>상호:</strong> ㈜JH FLEX</span>
+                <span className="text-border">|</span>
+                <span><strong>대표자:</strong> 문지학</span>
+                <span className="text-border">|</span>
+                <span><strong>사업자등록번호:</strong> 215-08-22790</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                <span><strong>사업장 주소:</strong> 경기도 안산시 단원구 만해로 205 (타원타크라3차 B동 407호)</span>
+                <span className="text-border">|</span>
+                <span><strong>팩스:</strong> 050-4166-4484</span>
+                <span className="text-border">|</span>
+                <span><strong>이메일:</strong> k2500rj@gmail.com</span>
+              </div>
+              <div className="pt-1 text-[11px] text-muted-foreground/80">
+                © 2009 JHFLEX Co., Ltd. All Rights Reserved.
+              </div>
             </div>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
-              <span><strong>사업장 주소:</strong> 경기도 안산시 단원구 만해로 205 (타원타크라3차 B동 407호)</span>
-              <span className="text-border">|</span>
-              <span><strong>팩스:</strong> 050-4166-4484</span>
-              <span className="text-border">|</span>
-              <span><strong>이메일:</strong> k2500rj@gmail.com</span>
-            </div>
-            <div className="pt-2 text-[11px] text-muted-foreground/80">
-              © 2009 JHFLEX Co., Ltd. All Rights Reserved.
+
+            {/* Map Action Buttons at the right end */}
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href="https://map.kakao.com/?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EB%A7%8C%ED%95%B4%EB%A1%9C%20205"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-border bg-background hover:bg-muted/70 text-xs font-semibold text-foreground transition-all shadow-xs"
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-[#fae100] ring-1 ring-black/10 inline-block"></span>
+                카카오맵
+                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground" />
+              </a>
+              <a
+                href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EB%A7%8C%ED%95%B4%EB%A1%9C%20205"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-border bg-background hover:bg-muted/70 text-xs font-semibold text-foreground transition-all shadow-xs"
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-[#03C75A] inline-block"></span>
+                네이버지도
+                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground" />
+              </a>
             </div>
           </div>
         </div>
