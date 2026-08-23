@@ -401,36 +401,32 @@ export default function Home() {
       {/* 8. FOOTER */}
       <footer className="border-t border-border bg-muted/20 py-16 px-4 sm:px-6 lg:px-8 mt-auto">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            <div className="md:col-span-2 space-y-4">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-extrabold text-primary-foreground text-sm tracking-tighter">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+            <div className="space-y-4">
+              <a
+                href="#top"
+                className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl border border-border bg-background hover:bg-muted/50 transition-all hover:scale-[1.02] shadow-sm group"
+                aria-label="홈 화면으로 이동"
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center font-extrabold text-primary-foreground text-sm tracking-tighter shadow-sm">
                   JH
                 </div>
-                <span className="font-bold text-lg text-foreground">
-                  JH <span className="text-primary-foreground font-extrabold">FLEX</span>
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-lg leading-tight tracking-tight text-foreground group-hover:text-primary-foreground transition-colors">
+                    JH <span className="text-primary-foreground font-extrabold">FLEX</span>
+                  </span>
+                  <span className="text-[11px] text-muted-foreground font-medium">
+                    홈 화면으로 이동 ↑
+                  </span>
+                </div>
+              </a>
+              <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
                 방산·항공·통신 분야 고신뢰성 FPCB(Flexible PCB) 전문 제조기업 JHFLEX입니다. 2009년 설립 이래 축적된 정밀 기술과 품질 관리로 미래 가치를 뒷받침합니다.
               </p>
             </div>
 
-            <div>
-              <h4 className="font-bold text-sm text-foreground mb-4">바로가기</h4>
-              <ul className="space-y-2.5 text-sm text-muted-foreground">
-                {navItems.map(([label, id]) => (
-                  <li key={id}>
-                    <a href={`#${id}`} className="hover:text-primary-foreground transition-colors">
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-sm text-foreground mb-4">사업장 정보</h4>
+            <div className="space-y-4 md:text-right">
+              <h4 className="font-bold text-sm text-foreground mb-2">사업장 정보</h4>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <p><strong className="text-foreground">주소:</strong> 경기도 안산시 단원구 만해로 205 (타원타크라3차 B동 407호)</p>
                 <p><strong className="text-foreground">팩스:</strong> 050-4166-4484</p>
