@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { ContactDialog } from "../components/ContactDialog";
-import { ArrowRight, CheckCircle2, Shield, Settings, Factory, ShieldCheck, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ShieldCheck, ChevronRight, Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "../contexts/ThemeContext";
+
+const navItems = [
+  ["회사소개", "about"],
+  ["제품소개", "products"],
+  ["방산사업", "defense"],
+  ["제조공정", "process"],
+  ["기술사양", "tech"],
+  ["사용소재", "material"],
+];
 
 const history = [
   ["2009", "JH FLEX 설립", "경기도 안산시 창업. 모바일·자동차 부품 납품을 시작했습니다."],
@@ -55,10 +66,90 @@ const materials = [
 ];
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <div className="flex flex-col">
+    <div id="top" className="flex flex-col min-h-screen">
+      {/* 0. STICKY HEADER / NAVBAR */}
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Brand Logo */}
+          <a href="#top" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-extrabold text-primary-foreground text-sm tracking-tighter shadow-sm">
+              JH
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-base leading-tight tracking-tight text-foreground">
+                JH <span className="text-primary-foreground font-extrabold">FLEX</span>
+              </span>
+              <span className="text-[10px] text-muted-foreground font-medium tracking-wider">
+                FPCB SPECIALIST · EST. 2009
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
+            {navItems.map(([label, id]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="text-muted-foreground hover:text-foreground transition-colors hover:text-primary-foreground font-semibold"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Header Action Buttons */}
+          <div className="flex items-center gap-3">
+            {toggleTheme && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                aria-label="테마 변경"
+              >
+                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            )}
+
+            <ContactDialog>
+              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold px-4 h-9 gap-1.5 shadow-sm">
+                견적 문의 <ArrowUpRight className="w-4 h-4" />
+              </Button>
+            </ContactDialog>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50"
+              aria-label="메뉴 열기"
+            >
+              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="md:hidden border-b border-border bg-background px-4 py-3 space-y-1">
+            {navItems.map(([label, id]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={() => setMenuOpen(false)}
+                className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-muted hover:text-primary-foreground"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+
       {/* 1. HERO SECTION */}
-      <section className="flex flex-col items-center justify-center min-h-[90vh] text-center px-4 py-20 bg-background relative overflow-hidden">
+      <section className="flex flex-col items-center justify-center min-h-[85vh] text-center px-4 py-20 bg-background relative overflow-hidden">
         <div className="pcb-canvas opacity-40 mix-blend-multiply">
           <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -123,11 +214,16 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <ContactDialog>
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold gap-2 h-14 px-8 text-base">
-                견적 문의하기 <ArrowRight className="w-5 h-5" />
+            <a href="#products">
+              <Button size="lg" variant="outline" className="font-bold gap-2 h-12 px-7 text-base border-primary/50 hover:bg-primary/10">
+                제품 둘러보기 <ArrowRight className="w-4 h-4" />
               </Button>
-            </ContactDialog>
+            </a>
+            <a href="#about">
+              <Button size="lg" variant="ghost" className="font-bold gap-2 h-12 px-7 text-base hover:bg-muted">
+                회사 소개 <ChevronRight className="w-4 h-4" />
+              </Button>
+            </a>
           </div>
         </div>
       </section>
@@ -302,6 +398,57 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 8. FOOTER */}
+      <footer className="border-t border-border bg-muted/20 py-16 px-4 sm:px-6 lg:px-8 mt-auto">
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div className="md:col-span-2 space-y-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-extrabold text-primary-foreground text-sm tracking-tighter">
+                  JH
+                </div>
+                <span className="font-bold text-lg text-foreground">
+                  JH <span className="text-primary-foreground font-extrabold">FLEX</span>
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
+                방산·항공·통신 분야 고신뢰성 FPCB(Flexible PCB) 전문 제조기업 JHFLEX입니다. 2009년 설립 이래 축적된 정밀 기술과 품질 관리로 미래 가치를 뒷받침합니다.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-sm text-foreground mb-4">바로가기</h4>
+              <ul className="space-y-2.5 text-sm text-muted-foreground">
+                {navItems.map(([label, id]) => (
+                  <li key={id}>
+                    <a href={`#${id}`} className="hover:text-primary-foreground transition-colors">
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-sm text-foreground mb-4">사업장 정보</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p><strong className="text-foreground">주소:</strong> 경기도 안산시 단원구 만해로 205 (타원타크라3차 B동 407호)</p>
+                <p><strong className="text-foreground">팩스:</strong> 050-4166-4484</p>
+                <p><strong className="text-foreground">이메일:</strong> k2500rj@gmail.com</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+            <div>
+              © 2009 JHFLEX Co., Ltd. All Rights Reserved. | 사업자등록번호: 215-08-22790 | 대표: 문재환
+            </div>
+            <div className="flex items-center gap-4">
+              <a href="#top" className="hover:text-foreground transition-colors font-medium">맨 위로 이동 ↑</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
