@@ -399,48 +399,61 @@ export default function Home() {
       </section>
 
       {/* 8. FOOTER */}
-      <footer className="border-t border-border bg-muted/20 py-16 px-4 sm:px-6 lg:px-8 mt-auto">
+      <footer className="border-t border-border bg-muted/20 py-12 px-4 sm:px-6 lg:px-8 mt-auto">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
-            <div className="space-y-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-border">
+            {/* Logo / Brand Home Button */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <a
                 href="#top"
-                className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl border border-border bg-background hover:bg-muted/50 transition-all hover:scale-[1.02] shadow-sm group"
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-xl border border-border bg-background hover:bg-muted/50 transition-all hover:scale-[1.02] shadow-sm group w-fit"
                 aria-label="홈 화면으로 이동"
               >
-                <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center font-extrabold text-primary-foreground text-sm tracking-tighter shadow-sm">
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-extrabold text-primary-foreground text-sm tracking-tighter shadow-sm">
                   JH
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="font-bold text-lg leading-tight tracking-tight text-foreground group-hover:text-primary-foreground transition-colors">
+                  <span className="font-bold text-base leading-tight tracking-tight text-foreground group-hover:text-primary-foreground transition-colors">
                     JH <span className="text-primary-foreground font-extrabold">FLEX</span>
                   </span>
-                  <span className="text-[11px] text-muted-foreground font-medium">
+                  <span className="text-[10px] text-muted-foreground font-medium">
                     홈 화면으로 이동 ↑
                   </span>
                 </div>
               </a>
-              <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                방산·항공·통신 분야 고신뢰성 FPCB(Flexible PCB) 전문 제조기업 JHFLEX입니다. 2009년 설립 이래 축적된 정밀 기술과 품질 관리로 미래 가치를 뒷받침합니다.
+              <span className="text-xs text-muted-foreground hidden sm:inline-block">|</span>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                방산·항공·통신 분야 고신뢰성 FPCB(Flexible PCB) 전문 제조기업 JHFLEX
               </p>
             </div>
 
-            <div className="space-y-4 md:text-right">
-              <h4 className="font-bold text-sm text-foreground mb-2">사업장 정보</h4>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p><strong className="text-foreground">주소:</strong> 경기도 안산시 단원구 만해로 205 (타원타크라3차 B동 407호)</p>
-                <p><strong className="text-foreground">팩스:</strong> 050-4166-4484</p>
-                <p><strong className="text-foreground">이메일:</strong> k2500rj@gmail.com</p>
-              </div>
-            </div>
+            {/* Back to top button */}
+            <a
+              href="#top"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5 rounded-lg hover:bg-muted w-fit"
+            >
+              맨 위로 이동 ↑
+            </a>
           </div>
 
-          <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-            <div>
-              © 2009 JHFLEX Co., Ltd. All Rights Reserved. | 사업자등록번호: 215-08-22790 | 대표: 문재환
+          {/* Business & Legal Info Grid */}
+          <div className="pt-8 flex flex-col gap-3 text-xs text-muted-foreground leading-relaxed">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+              <span><strong>상호:</strong> ㈜JH FLEX</span>
+              <span className="text-border">|</span>
+              <span><strong>대표자:</strong> 문지학</span>
+              <span className="text-border">|</span>
+              <span><strong>사업자등록번호:</strong> 215-08-22790</span>
             </div>
-            <div className="flex items-center gap-4">
-              <a href="#top" className="hover:text-foreground transition-colors font-medium">맨 위로 이동 ↑</a>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+              <span><strong>사업장 주소:</strong> 경기도 안산시 단원구 만해로 205 (타원타크라3차 B동 407호)</span>
+              <span className="text-border">|</span>
+              <span><strong>팩스:</strong> 050-4166-4484</span>
+              <span className="text-border">|</span>
+              <span><strong>이메일:</strong> k2500rj@gmail.com</span>
+            </div>
+            <div className="pt-2 text-[11px] text-muted-foreground/80">
+              © 2009 JHFLEX Co., Ltd. All Rights Reserved.
             </div>
           </div>
         </div>
