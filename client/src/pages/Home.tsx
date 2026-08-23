@@ -107,10 +107,15 @@ export default function Home() {
             {toggleTheme && (
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                aria-label="테마 변경"
+                className="p-2 rounded-xl border border-border bg-background hover:bg-muted text-foreground transition-all shadow-xs flex items-center justify-center cursor-pointer"
+                aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
+                title={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
               >
-                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {theme === "dark" ? (
+                  <Sun className="w-4.5 h-4.5 text-amber-400 fill-amber-400/20" />
+                ) : (
+                  <Moon className="w-4.5 h-4.5 text-slate-700" />
+                )}
               </button>
             )}
 
@@ -338,19 +343,19 @@ export default function Home() {
       </section>
 
       {/* 2. ABOUT SECTION (History) */}
-      <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-primary-foreground text-primary border-t border-primary-foreground">
+      <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#182314] dark:bg-[#0e140d] text-white border-t border-border/20 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white">끊임없는 혁신과 성장</h2>
-            <p className="text-primary/80 mt-4 text-lg">2009년부터 이어온 JH FLEX의 주요 연혁</p>
+            <p className="text-primary/90 mt-4 text-lg">2009년부터 이어온 JH FLEX의 주요 연혁</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {history.map((item, index) => (
-              <div key={index} className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm shadow-sm hover:bg-white/10 transition-colors">
-                <span className="text-primary/40 font-mono text-xl font-bold mb-4 block">{item[0]}</span>
+              <div key={index} className="bg-white/5 dark:bg-white/[0.03] border border-white/10 dark:border-white/5 p-8 rounded-2xl backdrop-blur-sm shadow-sm hover:bg-white/10 transition-colors">
+                <span className="text-primary font-mono text-xl font-bold mb-4 block">{item[0]}</span>
                 <h3 className="text-xl font-bold text-white mb-3">{item[1]}</h3>
-                <p className="text-primary/70 leading-relaxed text-sm">{item[2]}</p>
+                <p className="text-slate-300 dark:text-slate-400 leading-relaxed text-sm">{item[2]}</p>
               </div>
             ))}
           </div>
@@ -358,7 +363,7 @@ export default function Home() {
       </section>
 
       {/* 3. PRODUCTS SECTION */}
-      <section id="products" className="py-24 px-4 sm:px-6 lg:px-8">
+      <section id="products" className="py-24 px-4 sm:px-6 lg:px-8 bg-background relative z-10">
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
@@ -372,13 +377,13 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((prod, index) => (
-              <div key={index} className="group flex flex-col bg-background border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-colors">
-                <div className="h-48 bg-muted/50 flex flex-col items-center justify-center border-b border-border relative overflow-hidden p-6 gap-1.5">
+              <div key={index} className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-colors shadow-xs">
+                <div className="h-48 bg-muted/40 flex flex-col items-center justify-center border-b border-border relative overflow-hidden p-6 gap-1.5">
                   <div className="absolute top-4 left-4 bg-background/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold border border-border z-10 text-foreground">
                     {prod[0]}
                   </div>
                   {diagramSpecs[index].layers.map((layer, lIdx) => (
-                    <div key={lIdx} className="w-full max-w-[80%] bg-primary/10 border border-primary/20 rounded text-center text-xs text-primary-foreground py-1.5 font-medium shadow-sm">
+                    <div key={lIdx} className="w-full max-w-[80%] bg-primary/15 border border-primary/30 rounded text-center text-xs text-foreground py-1.5 font-medium shadow-xs">
                       {layer}
                     </div>
                   ))}
@@ -404,24 +409,24 @@ export default function Home() {
       </section>
 
       {/* 4. DEFENSE SECTION */}
-      <section id="defense" className="py-24 px-4 sm:px-6 lg:px-8 bg-primary-foreground text-primary">
+      <section id="defense" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#182314] dark:bg-[#0e140d] text-white relative z-10 border-t border-border/20">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <ShieldCheck className="w-16 h-16 mx-auto mb-6 opacity-90" />
+            <ShieldCheck className="w-16 h-16 mx-auto mb-6 text-primary" />
             <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">특수 방산 사업 역량</h2>
-            <p className="text-primary/80 text-lg max-w-2xl mx-auto">
+            <p className="text-primary/90 text-lg max-w-2xl mx-auto">
               가혹한 환경에서도 100%의 신뢰성을 보장해야 하는 방산 장비. JH FLEX는 엄격한 품질 관리로 국방 기술의 기반을 다집니다.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {defense.map((def, index) => (
-              <div key={index} className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm flex gap-6">
-                <div className="text-4xl font-mono font-bold text-primary/40 shrink-0">{def[0]}</div>
+              <div key={index} className="bg-white/5 dark:bg-white/[0.03] border border-white/10 dark:border-white/5 p-8 rounded-2xl backdrop-blur-sm flex gap-6 hover:bg-white/10 transition-colors">
+                <div className="text-4xl font-mono font-bold text-primary shrink-0">{def[0]}</div>
                 <div>
                   <h3 className="text-xl font-bold text-white mb-3">{def[1]}</h3>
-                  <p className="text-primary/70 text-sm leading-relaxed mb-4">{def[2]}</p>
-                  <span className="inline-block border border-primary/30 text-primary px-3 py-1 rounded-full text-xs font-semibold">
+                  <p className="text-slate-300 dark:text-slate-400 text-sm leading-relaxed mb-4">{def[2]}</p>
+                  <span className="inline-block border border-primary/40 text-primary px-3 py-1 rounded-full text-xs font-semibold bg-primary/10">
                     {def[3]}
                   </span>
                 </div>
@@ -432,7 +437,7 @@ export default function Home() {
       </section>
 
       {/* 5. PROCESS SECTION */}
-      <section id="process" className="py-24 px-4 sm:px-6 lg:px-8">
+      <section id="process" className="py-24 px-4 sm:px-6 lg:px-8 bg-background relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">정밀 제조 공정</h2>
@@ -441,8 +446,8 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-3">
             {processSteps.map((step, index) => (
-              <div key={index} className="flex items-center gap-2 bg-muted/50 border border-border px-4 py-3 rounded-lg">
-                <span className="text-xs font-mono font-bold text-primary-foreground/60 w-5">{index + 1}</span>
+              <div key={index} className="flex items-center gap-2 bg-muted/40 border border-border px-4 py-3 rounded-lg hover:border-primary/50 transition-colors">
+                <span className="text-xs font-mono font-bold text-primary w-5">{index + 1}</span>
                 <span className="text-sm font-semibold text-foreground">{step}</span>
               </div>
             ))}
@@ -451,22 +456,22 @@ export default function Home() {
       </section>
 
       {/* 6. TECH SPECS SECTION */}
-      <section id="tech" className="py-24 px-4 sm:px-6 lg:px-8 bg-primary-foreground text-primary border-t border-primary-foreground">
+      <section id="tech" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#182314] dark:bg-[#0e140d] text-white border-t border-border/20 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white">핵심 기술 사양</h2>
-            <p className="text-primary/80 mt-4 text-lg">업계 최고 수준의 제조 역량과 기술 사양을 보유합니다.</p>
+            <p className="text-primary/90 mt-4 text-lg">업계 최고 수준의 제조 역량과 기술 사양을 보유합니다.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {techSpecs.map((spec, index) => (
-              <div key={index} className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm shadow-sm hover:bg-white/10 transition-colors">
-                <span className="text-primary/40 font-mono text-xl font-bold mb-4 block">{spec[0]}</span>
+              <div key={index} className="bg-white/5 dark:bg-white/[0.03] border border-white/10 dark:border-white/5 p-8 rounded-2xl backdrop-blur-sm shadow-sm hover:bg-white/10 transition-colors">
+                <span className="text-primary font-mono text-xl font-bold mb-4 block">{spec[0]}</span>
                 <h3 className="text-xl font-bold text-white mb-3">{spec[1]}</h3>
-                <p className="text-primary/70 leading-relaxed text-sm mb-6">{spec[2]}</p>
+                <p className="text-slate-300 dark:text-slate-400 leading-relaxed text-sm mb-6">{spec[2]}</p>
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {(spec[3] as string[]).map((tag, i) => (
-                    <span key={i} className="inline-block border border-primary/30 text-primary px-3 py-1.5 rounded-md text-xs font-semibold">
+                    <span key={i} className="inline-block border border-primary/40 text-primary px-3 py-1.5 rounded-md text-xs font-semibold bg-primary/10">
                       {tag}
                     </span>
                   ))}
@@ -478,7 +483,7 @@ export default function Home() {
       </section>
 
       {/* 7. MATERIAL SECTION */}
-      <section id="material" className="py-24 px-4 sm:px-6 lg:px-8">
+      <section id="material" className="py-24 px-4 sm:px-6 lg:px-8 bg-background relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">사용 소재</h2>
