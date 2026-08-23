@@ -150,21 +150,31 @@ export default function Home() {
 
       {/* 1. HERO SECTION */}
       <section className="flex flex-col items-center justify-center min-h-[85vh] text-center px-4 py-20 bg-background relative overflow-hidden">
-        <div className="pcb-canvas opacity-40 mix-blend-multiply">
+        <div className="pcb-canvas">
           <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="traceGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#8e9b77" stopOpacity="0"/>
-                <stop offset="50%" stopColor="#8e9b77" stopOpacity="1"/>
-                <stop offset="100%" stopColor="#8e9b77" stopOpacity="0"/>
+                <stop offset="0%" stopColor="#00D4F5" stopOpacity="0"/>
+                <stop offset="50%" stopColor="#00D4F5" stopOpacity="1"/>
+                <stop offset="100%" stopColor="#00D4F5" stopOpacity="0"/>
               </linearGradient>
               <linearGradient id="traceGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#485c11" stopOpacity="0"/>
-                <stop offset="50%" stopColor="#485c11" stopOpacity="1"/>
-                <stop offset="100%" stopColor="#485c11" stopOpacity="0"/>
+                <stop offset="0%" stopColor="#1878CC" stopOpacity="0"/>
+                <stop offset="50%" stopColor="#1878CC" stopOpacity="1"/>
+                <stop offset="100%" stopColor="#1878CC" stopOpacity="0"/>
               </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow-strong">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
             </defs>
-            <g stroke="#8e9b77" strokeWidth="0.5">
+      
+            {/* Grid Lines */}
+            <g stroke="currentColor" className="text-primary/10" strokeWidth="0.5">
               <line x1="0" y1="100" x2="1440" y2="100"/>
               <line x1="0" y1="200" x2="1440" y2="200"/>
               <line x1="0" y1="300" x2="1440" y2="300"/>
@@ -182,19 +192,98 @@ export default function Home() {
               <line x1="1120" y1="0" x2="1120" y2="900"/>
               <line x1="1280" y1="0" x2="1280" y2="900"/>
             </g>
-            <g fill="none" stroke="#8e9b77" strokeWidth="1">
+      
+            {/* IC Chips */}
+            <g fill="none" stroke="rgba(0,212,245,0.25)" strokeWidth="1">
               <rect className="chip-blink" x="800" y="150" width="120" height="80" rx="4"/>
               <rect className="chip-blink" x="810" y="160" width="100" height="60" rx="2"/>
               <line x1="800" y1="170" x2="780" y2="170"/> <line x1="800" y1="180" x2="780" y2="180"/>
               <line x1="800" y1="190" x2="780" y2="190"/> <line x1="800" y1="200" x2="780" y2="200"/>
               <line x1="920" y1="170" x2="940" y2="170"/> <line x1="920" y1="180" x2="940" y2="180"/>
               <line x1="920" y1="190" x2="940" y2="190"/> <line x1="920" y1="200" x2="940" y2="200"/>
+              <line x1="820" y1="150" x2="820" y2="130"/> <line x1="840" y1="150" x2="840" y2="130"/>
+              <line x1="860" y1="150" x2="860" y2="130"/> <line x1="880" y1="150" x2="880" y2="130"/>
+              <line x1="820" y1="230" x2="820" y2="250"/> <line x1="840" y1="230" x2="840" y2="250"/>
+              <line x1="860" y1="230" x2="860" y2="250"/> <line x1="880" y1="230" x2="880" y2="250"/>
             </g>
-            <g stroke="#8e9b77" strokeWidth="1" fill="none">
+            <g fill="none" stroke="rgba(0,212,245,0.20)" strokeWidth="1">
+              <rect className="chip-blink" x="1100" y="400" width="100" height="70" rx="4"/>
+              <rect className="chip-blink" x="1108" y="408" width="84" height="54" rx="2"/>
+              <line x1="1100" y1="415" x2="1082" y2="415"/> <line x1="1100" y1="425" x2="1082" y2="425"/>
+              <line x1="1100" y1="435" x2="1082" y2="435"/> <line x1="1100" y1="445" x2="1082" y2="445"/>
+              <line x1="1200" y1="415" x2="1218" y2="415"/> <line x1="1200" y1="425" x2="1218" y2="425"/>
+              <line x1="1200" y1="435" x2="1218" y2="435"/> <line x1="1200" y1="445" x2="1218" y2="445"/>
+            </g>
+            <g fill="none" stroke="rgba(24,120,204,0.25)" strokeWidth="1">
+              <rect className="chip-blink" x="950" y="600" width="90" height="65" rx="4"/>
+              <rect className="chip-blink" x="957" y="607" width="76" height="51" rx="2"/>
+              <line x1="950" y1="615" x2="933" y2="615"/> <line x1="950" y1="625" x2="933" y2="625"/>
+              <line x1="950" y1="635" x2="933" y2="635"/> <line x1="950" y1="645" x2="933" y2="645"/>
+              <line x1="1040" y1="615" x2="1057" y2="615"/> <line x1="1040" y1="625" x2="1057" y2="625"/>
+            </g>
+      
+            {/* Background Circuit Traces */}
+            <g stroke="currentColor" className="text-primary/20" strokeWidth="1" fill="none">
               <path d="M0,300 L200,300 L200,200 L400,200 L400,400 L600,400"/>
               <path d="M600,400 L600,250 L800,250 L800,150"/>
               <path d="M940,150 L1000,150 L1000,300 L1100,300 L1100,400"/>
               <path d="M1200,400 L1300,400 L1300,250 L1440,250"/>
+              <path d="M0,600 L150,600 L150,500 L350,500 L350,650 L550,650"/>
+              <path d="M550,650 L550,750 L750,750 L750,600 L950,600"/>
+              <path d="M1040,600 L1100,600 L1100,470 L1200,470"/>
+              <path d="M1200,470 L1300,470 L1300,600 L1440,600"/>
+              <path d="M200,800 L200,700 L500,700 L500,800 L800,800"/>
+              <path d="M1100,700 L1100,800 L1300,800 L1300,700 L1440,700"/>
+            </g>
+      
+            {/* Dynamic Animated Flowing Signal Traces */}
+            <path className="trace trace-1" d="M-50,300 L200,300 L200,200 L400,200 L400,300 L700,300"
+              stroke="#00D4F5" strokeWidth="2.5" fill="none" filter="url(#glow)" opacity="0.9"/>
+            <path className="trace trace-2" d="M-50,500 L150,500 L150,600 L400,600 L400,500 L650,500"
+              stroke="#1878CC" strokeWidth="2" fill="none" filter="url(#glow)" opacity="0.8"/>
+            <path className="trace trace-3" d="M700,200 L900,200 L900,150 L1100,150 L1100,200 L1300,200 L1300,150 L1490,150"
+              stroke="#00D4F5" strokeWidth="2.5" fill="none" filter="url(#glow)" opacity="0.9"/>
+            <path className="trace trace-4" d="M-50,700 L200,700 L200,800 L500,800 L500,700 L800,700"
+              stroke="#1878CC" strokeWidth="2" fill="none" filter="url(#glow)" opacity="0.75"/>
+            <path className="trace trace-5" d="M320,0 L320,200 L480,200 L480,400 L640,400 L640,600 L800,600 L800,900"
+              stroke="#00D4F5" strokeWidth="2" fill="none" filter="url(#glow)" opacity="0.85"/>
+            <path className="trace trace-6" d="M960,0 L960,150 L800,150 L800,300 L960,300 L960,470 L1100,470 L1100,700 L960,700 L960,900"
+              stroke="#1878CC" strokeWidth="2.5" fill="none" filter="url(#glow)" opacity="0.85"/>
+            <path className="trace trace-7" d="M1280,0 L1280,100 L1200,100 L1200,300 L1280,300 L1280,500 L1200,500 L1200,700 L1280,700 L1280,900"
+              stroke="#00D4F5" strokeWidth="2" fill="none" filter="url(#glow)" opacity="0.8"/>
+            <path className="trace trace-8" d="M160,0 L160,300 L320,300 L320,500 L160,500 L160,750 L320,750 L320,900"
+              stroke="#1878CC" strokeWidth="1.5" fill="none" filter="url(#glow)" opacity="0.7"/>
+      
+            {/* Glowing Pulsing Nodes */}
+            <g fill="#00D4F5" filter="url(#glow-strong)">
+              <circle className="node-glow" cx="200" cy="300" r="4"/>
+              <circle className="node-glow" cx="400" cy="200" r="4"/>
+              <circle className="node-glow" cx="640" cy="400" r="3.5"/>
+              <circle className="node-glow" cx="800" cy="300" r="4"/>
+              <circle className="node-glow" cx="960" cy="150" r="3.5"/>
+              <circle className="node-glow" cx="1100" cy="400" r="4"/>
+              <circle className="node-glow" cx="1280" cy="300" r="3.5"/>
+              <circle className="node-glow" cx="320" cy="500" r="4"/>
+              <circle className="node-glow" cx="480" cy="600" r="3.5"/>
+              <circle className="node-glow" cx="800" cy="700" r="4"/>
+              <circle className="node-glow" cx="960" cy="600" r="3.5"/>
+              <circle className="node-glow" cx="1200" cy="500" r="4"/>
+              <circle className="node-glow" cx="160" cy="750" r="3.5"/>
+              <circle className="node-glow" cx="500" cy="800" r="4"/>
+            </g>
+            <g fill="#1878CC" filter="url(#glow)">
+              <circle className="node-glow" cx="150" cy="500" r="3.5"/>
+              <circle className="node-glow" cx="400" cy="600" r="4"/>
+              <circle className="node-glow" cx="650" cy="500" r="3.5"/>
+              <circle className="node-glow" cx="960" cy="300" r="4"/>
+              <circle className="node-glow" cx="1100" cy="470" r="3.5"/>
+              <circle className="node-glow" cx="1300" cy="200" r="4"/>
+            </g>
+      
+            {/* Light Scan Sweeping Line */}
+            <g className="scan-line">
+              <rect x="0" y="0" width="3" height="900" fill="url(#traceGrad2)" opacity="0.25"/>
+              <rect x="4" y="0" width="1.5" height="900" fill="rgba(0,212,245,0.4)"/>
             </g>
           </svg>
         </div>
