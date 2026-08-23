@@ -90,9 +90,14 @@
 .pcb-canvas {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 0 !important;
   overflow: hidden;
   pointer-events: none;
+}
+.hero-content-layer {
+  position: relative;
+  z-index: 50 !important;
+  isolation: isolate;
 }
 .pcb-canvas svg {
   width: 100%;

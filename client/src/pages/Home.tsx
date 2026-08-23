@@ -308,28 +308,28 @@ export default function Home() {
           </svg>
         </div>
         
-        <div className="relative z-20 space-y-6 max-w-4xl">
-          <div className="inline-flex items-center rounded-full bg-primary/30 backdrop-blur-xs px-4 py-1.5 text-sm text-primary-foreground font-semibold mb-2 border border-primary/40 shadow-xs relative z-20">
+        <div className="hero-content-layer relative z-50 space-y-6 max-w-4xl">
+          <div className="inline-flex items-center rounded-full bg-primary/30 backdrop-blur-sm px-4 py-1.5 text-sm text-primary-foreground font-semibold mb-2 border border-primary/40 shadow-xs relative z-50">
             FPCB SPECIALIST · EST. 2009
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] relative z-20">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] relative z-50">
             혁신적인 <span className="text-primary-foreground">FPCB 제조</span>의 <br className="hidden md:block"/>
             새로운 기준을 제시합니다
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto pt-6 leading-relaxed relative z-20">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto pt-6 leading-relaxed relative z-50 font-medium">
             방산 장비부터 첨단 모바일, 산업용 정밀 부품까지. JH FLEX는 고품질 플렉시블 기판(FPCB)과 신뢰성 높은 제조 공정으로 미래 기술을 뒷받침합니다.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 relative z-20">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 relative z-50">
             <a href="#products">
-              <Button size="lg" variant="outline" className="font-bold gap-2 h-12 px-7 text-base border-primary/50 hover:bg-primary/10 bg-background/80 backdrop-blur-xs">
+              <Button size="lg" variant="outline" className="font-bold gap-2 h-12 px-7 text-base border-primary/50 hover:bg-primary/10 bg-background/90 backdrop-blur-sm shadow-xs">
                 제품 둘러보기 <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
             <a href="#about">
-              <Button size="lg" variant="ghost" className="font-bold gap-2 h-12 px-7 text-base hover:bg-muted bg-background/50 backdrop-blur-xs">
+              <Button size="lg" variant="ghost" className="font-bold gap-2 h-12 px-7 text-base hover:bg-muted bg-background/80 backdrop-blur-sm shadow-xs">
                 회사 소개 <ChevronRight className="w-4 h-4" />
               </Button>
             </a>
