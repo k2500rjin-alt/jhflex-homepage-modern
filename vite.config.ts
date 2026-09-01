@@ -3,8 +3,10 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig } from "vite";
 
+const isVercel = Boolean(process.env.VERCEL);
+
 export default defineConfig({
-  base: "/jhflex-homepage-modern/",
+  base: isVercel ? "/" : "/jhflex-homepage-modern/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
